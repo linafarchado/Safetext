@@ -1,0 +1,12 @@
+discord.py
+python-dotenv
+asyncio
+pandas
+scikit-learn
+imblearn
+matplotlib
+seaborn
+emoji
+faker
+torch
+faker-dataset

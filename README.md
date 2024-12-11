@@ -55,9 +55,9 @@ The bot leverages Natural Language Processing (NLP) models trained on diverse da
    pip install -r requirements.txt
    ```
 2. Add your Discord bot token in the .env file in discord_bot/
-```bash
-DISCORD_TOKEN=<your discord token>
-```
+    ```bash
+    DISCORD_TOKEN=<your discord token>
+    ```
 3. Run notebooks to train models (We have default one if you don't have time to run them)
 To use them, change the names of the used models in the corresponding discord bot file.
 4. Run the bot:
