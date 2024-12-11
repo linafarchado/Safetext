@@ -6,9 +6,9 @@ fake_eng = Faker("en_US")  # English (US)
 fake_fr = Faker("fr_FR")   # French
 fake_de = Faker("de_DE")   # German
 
-# Function to generate a random phone number with 30% from France, 70% from anywhere
+# Function to generate a random phone number with 50% from France, 50% from anywhere
 def get_random_phone_number():
-    # Define probabilities: 30% France, 70% other
+    # Define probabilities: 50% France, 50% other
     locale_choice = random.choices(
         population=["fr", "other"],
         weights=[50, 50],
@@ -16,7 +16,11 @@ def get_random_phone_number():
     )[0]
     
     if locale_choice == "fr":
-        return fake_fr.phone_number()  # French phone number
+        phone_number = fake_fr.phone_number()
+        if random.random() < 0.5:
+            phone_number = phone_number.replace(" ", "")
+
+        return phone_number
     else:
         # Randomly pick between English and German for the "other" category
         return random.choice([fake_eng.phone_number(), fake_de.phone_number()])
@@ -46,11 +50,17 @@ def generate_message(include_sensitive=False):
         # Generate sensitive data based on the selected choice
         sensitive_data = []
         if "email" in choice:
-            sensitive_data.append(fake_eng.email())  # Keep email in English format
+            if random.random() < 0.5:
+                sensitive_data.append(fake_fr.email()) # Randomly generate french email
+            else:
+                sensitive_data.append(fake_eng.email()) # Randomly generate enflish email
         if "phone" in choice:
             sensitive_data.append(get_random_phone_number())  # Randomly generate phone number
         if "address" in choice:
-            sensitive_data.append(fake_fr.address())  # Use French addresses for variety
+            if random.random() < 0.5:
+                sensitive_data.append(fake_fr.address())  # Use French addresses for variety
+            else:
+                sensitive_data.append(fake_eng.address())  # Use English addresses for variety
         
         # Randomly insert each piece of sensitive data into the sentence at different spots
         words = base_message.split()
