@@ -7,9 +7,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 import asyncio
 
-
-MUTE_DURATION = 5  # Duration in seconds (e.g., 300 seconds = 5 minutes)
-
+MUTE_DURATION = 5  # Duration in seconds
 
 # Load environment variables from .env file
 load_dotenv()
@@ -71,8 +69,6 @@ async def mute_user(user, guild):
     except discord.HTTPException as e:
         print(f"Failed to re-add Basique role to {user}: {e}")
     
-
-
 # Function to classify insults
 def classify_insult(text):
     try:
@@ -96,7 +92,6 @@ def classify_sensitive(text):
 async def on_ready():
     print(f'Logged in as {bot.user}!')
 
-
 # Event when the bot receives a message
 @bot.event
 async def on_message(message):
@@ -107,11 +102,6 @@ async def on_message(message):
         return
 
     user_input = message.content.strip()
-
-    # Process commands before any other logic
-    if user_input.startswith('!'):
-        await bot.process_commands(message)
-        return
 
     # Check if the message matches an override request
     if message.author.id in override_requests and user_input == override_requests[message.author.id]:
@@ -140,7 +130,7 @@ async def on_message(message):
 
     # Step 2: Check for sensitive data if no insult was detected
     sensitive_result = classify_sensitive(user_input)
-    if sensitive_result == 1:
+    if sensitive_result == 1 and not user_input.startswith('!allow'):
         try:
             await message.delete()
             await message.channel.send(
