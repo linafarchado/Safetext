@@ -14,19 +14,19 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
 # Load the sensitive data model
-with open('random_forest_model.pkl', 'rb') as model_file:
+with open('../models/sensitive/random_forest_model.pkl', 'rb') as model_file:
     classifier_sensitive = pickle.load(model_file)
 
 # Load the TfidfVectorizer for sensitive data
-with open('tfidf_vectorizer.pkl', 'rb') as vectorizer_file:
+with open('../models/sensitive/tfidf_vectorizer.pkl', 'rb') as vectorizer_file:
     vectorizer_sensitive = pickle.load(vectorizer_file)
 
 # Load the insult detection model
-with open('lg_insult.pkl', 'rb') as insult_model_file:
+with open('../models/insults/lg_insult.pkl', 'rb') as insult_model_file:
     classifier_insult = pickle.load(insult_model_file)
 
 # Load the TfidfVectorizer for insult detection
-with open('vector_insult.pkl', 'rb') as vectorizer_insult_file:
+with open('../models/insults/vector_insult.pkl', 'rb') as vectorizer_insult_file:
     vectorizer_insult = pickle.load(vectorizer_insult_file)
 
 # Set up Discord client

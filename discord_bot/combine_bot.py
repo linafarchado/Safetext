@@ -12,11 +12,11 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
 # Load the combined model
-with open('combine_logistic_regression_model.pkl', 'rb') as model_file:
+with open('../models/combine/combine_logistic_regression_model.pkl', 'rb') as model_file:
     classifier_combined = pickle.load(model_file)
 
 # Load the TfidfVectorizer
-with open('combine_tfidf_vectorizer.pkl', 'rb') as vectorizer_file:
+with open('../models/combine/combine_tfidf_vectorizer.pkl', 'rb') as vectorizer_file:
     vectorizer_combined = pickle.load(vectorizer_file)
 
 # Set up Discord client
