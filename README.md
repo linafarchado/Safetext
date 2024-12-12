@@ -36,11 +36,12 @@ The bot leverages Natural Language Processing (NLP) models trained on diverse da
 ## Features
 - **Toxicity Detection:**
   - Identifies offensive, insulting, or harmful language in Discord messages.
-  - Trained using a Logistic Regression model with TF-IDF vectorization.
 
 - **Sensitive Data Leak Prevention:**
   - Detects sensitive information such as personally identifiable information (PII) or confidential data.
-  - Trained using a Random Forest model with TF-IDF vectorization.
+
+- **Blur Sensitive Data**
+  - Blur sensitive data when leaked.
 
 ## Usage
 
@@ -60,6 +61,7 @@ The bot leverages Natural Language Processing (NLP) models trained on diverse da
     ```
 3. Run notebooks to train models (We have default one if you don't have time to run them)
 To use them, change the names of the used models in the corresponding discord bot file.
+
 4. Run the bot:
    ```bash
    cd discord_bot/
@@ -68,6 +70,7 @@ To use them, change the names of the used models in the corresponding discord bo
 
 ### Model Files
 The pre-trained models are stored in the `models` directory and loaded by the bot scripts for prediction.
+Except for the blur bot, the model is too big for git. You need to run the ```blur-pii.ipynb``` notebook.
 
 ### Discord bot Features
 
@@ -90,3 +93,11 @@ The pre-trained models are stored in the `models` directory and loaded by the bo
 - Insults result in temporary mutes.
 
 - Sensitive data and insults are automatically deleted.
+
+**Blur Bot**
+
+- Utilizes one Bert model fine tuned on sensitive data.
+
+- It automatically replaces any sensitive data with a masked version (ex: Alexandre == [GIVENNAME])
+
+- ```!allow``` command to bypass sensitive data censorship.
