@@ -3,9 +3,8 @@ import pickle
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
 import asyncio
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 MUTE_DURATION = 5  # Duration in seconds
 
@@ -14,19 +13,19 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
 # Load the sensitive data model
-with open('../models/sensitive/random_forest_model.pkl', 'rb') as model_file:
+with open('../models/sensitive/sensitive_logistic_regression_model.pkl', 'rb') as model_file:
     classifier_sensitive = pickle.load(model_file)
 
 # Load the TfidfVectorizer for sensitive data
-with open('../models/sensitive/tfidf_vectorizer.pkl', 'rb') as vectorizer_file:
+with open('../models/sensitive/sensitive_tfidf_vectorize.pkl', 'rb') as vectorizer_file:
     vectorizer_sensitive = pickle.load(vectorizer_file)
 
 # Load the insult detection model
-with open('../models/insults/lg_insult.pkl', 'rb') as insult_model_file:
+with open('../models/insults/insults_logistic_regression_model.pkl', 'rb') as insult_model_file:
     classifier_insult = pickle.load(insult_model_file)
 
 # Load the TfidfVectorizer for insult detection
-with open('../models/insults/vector_insult.pkl', 'rb') as vectorizer_insult_file:
+with open('../models/insults/insults_tfidf_lr_vectorizer.pkl', 'rb') as vectorizer_insult_file:
     vectorizer_insult = pickle.load(vectorizer_insult_file)
 
 # Set up Discord client
