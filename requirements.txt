@@ -5,7 +5,9 @@ pandas
 scikit-learn
 imblearn
 matplotlib
-seaborn
+datasets
+transformers
+seqeval
 emoji
 faker
 torch
