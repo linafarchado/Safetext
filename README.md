@@ -101,3 +101,49 @@ Except for the blur bot, the model is too big for git. You need to run the ```bl
 - It automatically replaces any sensitive data with a masked version (ex: Alexandre == [GIVENNAME])
 
 - ```!allow``` command to bypass sensitive data censorship.
+
+# Technical Overview
+
+## Datasets 
+
+### 1. Hate Speech and Offensive Language Dataset
+This dataset, sourced from Twitter data, was created to study hate speech detection. Each text entry is classified into one of three categories:
+- Hate speech
+- Offensive language
+- Neither
+
+### 2. PII-Masking-400k (AI4Privacy)
+This dataset is specifically designed to train and evaluate models that mask **personally identifiable information (PII)** and sensitive data in text. It contains:
+- **400,000 rows** of synthetically generated data
+- **Six languages** to support multilingual applications
+
+The synthetic nature of the dataset ensures that it avoids any actual data leaks while simulating realistic use cases.
+
+### 3. Synthetic Dataset (Faker)
+This dataset is entirely generated using the [Faker](https://faker.readthedocs.io/en/master/) library. It includes:
+- Email addresses
+- Postal addresses
+- Phone numbers
+
+---
+
+## Data Processing and Modeling
+
+### Data Cleaning
+For the **Hate Speech and Offensive Language Dataset**, we performed:
+1. **Resampling** to handle class imbalances.
+2. **Data cleaning** to remove noise and improve data quality.
+
+### Feature Engineering
+- We used **TF-IDF** as a vectorizer to transform the text data into numerical representations suitable for machine learning models.
+
+### Machine Learning Models
+We applied three machine learning models to classify the data:
+1. **Logistic Regression**
+2. **Random Forest**
+3. **Support Vector Machine (SVM)**
+
+For hyperparameter optimization, a **GridSearch** approach was used to identify the best-performing parameters for each model.
+
+### Fine-Tuned Model
+For the **PII-Masking-400k Dataset**, we fine-tuned a **BERT-based model** to detect and mask PII effectively. The fine-tuning process adapted the pre-trained BERT model to the specific task using this dataset.
