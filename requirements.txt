@@ -2,7 +2,7 @@ discord.py
 python-dotenv
 asyncio
 pandas
-scikit-learn
+scikit-learn==1.5.2
 imblearn
 matplotlib
 datasets
@@ -11,4 +11,3 @@ seqeval
 emoji
 faker
 torch
-faker-dataset
