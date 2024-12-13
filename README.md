@@ -154,4 +154,24 @@ We applied three machine learning models to classify the data:
 For hyperparameter optimization, a **GridSearch** approach was used to identify the best-performing parameters for each model.
 
 ### Fine-Tuned Model
-For the **PII-Masking-400k Dataset**, we fine-tuned a **BERT-based model** to detect and mask PII effectively. The fine-tuning process adapted the pre-trained BERT model to the specific task using this dataset.
+For the PII-Masking-400k Dataset, we fine-tuned a **BERT-based model** to detect and mask Personally Identifiable Information (PII) effectively. Specifically:
+
+- **Model Base**: We used `bert-base-multilingual-cased` initially, but switched to `bert-base-cased` since the dataset was filtered to English texts only.
+
+- **Data Preprocessing**:
+  - Filtered the dataset to include only English language texts
+  - Implemented a custom tokenization strategy using BERT's tokenizer
+  - Used the BIO (Begin, Inside, Outside) tagging scheme for named entity recognition
+
+- **Training Parameters**:
+  - Learning rate: 2e-5
+  - Batch size: 8
+  - Epochs: 3
+
+- **Performance**:
+  - Achieved high accuracy, precision, and recall
+  - Final epoch metrics:
+    * Accuracy: 99.6965%
+    * Precision: 99.6967%
+    * Recall: 99.6965%
+    * F1 Score: 99.6958%
