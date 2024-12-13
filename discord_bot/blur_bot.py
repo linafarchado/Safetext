@@ -10,7 +10,7 @@ DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
 # Load the trained model
 MODEL_PATH = "../models/blur/saved_model"
-tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased")
+tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
 model = AutoModelForTokenClassification.from_pretrained(MODEL_PATH)
 
 # Create the NER pipeline

@@ -11,26 +11,34 @@ The bot leverages Natural Language Processing (NLP) models trained on diverse da
 
 ```
 .
-├── discord_bot
-│   ├── combine_bot.py         # Combines functionality for toxicity and sensitive data detection
-│   └── uncombined_bot.py      # Uses 2 different models instead of one
-├── models
-│   ├── combine
+.
+├── AUTHORS.txt                             
+├── datasets                               
+│   ├── labeled_data.csv                    # Dataset with labeled data for classification tasks (e.g., toxicity or sensitive data)
+│   └── sensitive_data.csv                  # Dataset containing sensitive data for PII masking or related tasks
+├── discord_bot                             
+│   ├── blur_bot.py                         # Discord bot for PII masking using the Blur model
+│   ├── combine_bot.py                      # Discord bot for combined tasks (e.g., toxicity and PII masking)
+│   └── uncombined_bot.py                   # Discord bot for independent tasks without combining datasets
+├── models                                  
+│   ├── combine                             
 │   │   ├── combine_logistic_regression_model.pkl  # Logistic Regression model for combined tasks
-│   │   └── combine_tfidf_vectorizer.pkl           # TF-IDF vectorizer for combined tasks
-│   ├── insults
-│   │   ├── lg_insult.pkl                          # Logistic Regression model for insult detection
-│   │   └── vector_insult.pkl                      # TF-IDF vectorizer for insult detection
-│   └── sensitive
-│       ├── random_forest_model.pkl                # Random Forest model for sensitive data detection
-│       └── tfidf_vectorizer.pkl                   # TF-IDF vectorizer for sensitive data detection
-├── notebooks
-│   ├── combine.ipynb                              # Notebook for combined task model development
-│   ├── faker_dataset.py                           # Script to generate a synthetic dataset using Faker
-│   ├── nlp-sensitive-data_faker.ipynb            # Notebook for sensitive data model training and analysis
-│   ├── project-offensive-language-analysis.ipynb # Notebook for offensive language analysis and model training
-│   └── safetext.ipynb                             # Notebook for text safety analysis and model training
-└── README.md
+│   │   └── combine_tfidf_vectorizer.pkl    # TF-IDF vectorizer for combined tasks
+│   ├── insults                             
+│   │   ├── insults_logistic_regression_model.pkl  # Logistic Regression model for insult detection
+│   │   └── insults_tfidf_lr_vectorizer.pkl # TF-IDF vectorizer for insult detection
+│   └── sensitive                           
+│       ├── sensitive_logistic_regression_model.pkl # Logistic Regression model for sensitive data detection
+│       └── sensitive_tfidf_vectorize.pkl   # TF-IDF vectorizer for sensitive data detection
+├── notebooks                               
+│   ├── blur-pii.ipynb                      # Notebook to fine tune Bert to mask data
+│   ├── combine.ipynb                       # Notebook for exploring combined tasks
+│   ├── faker_dataset.py                    # Python script for generating synthetic data using Faker
+│   ├── nlp-sensitive-data_faker.ipynb      # Notebook for handling sensitive data tasks with synthetic datasets
+│   └── nlp-toxicity-data.ipynb             # Notebook for analyzing and processing toxicity/insult data
+├── README.md                               
+└── requirements.txt                        
+
 ```
 
 ## Features
